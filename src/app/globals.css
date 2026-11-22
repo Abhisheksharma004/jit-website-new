@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --paper: #f4f1ea;
+    --paper-card: #faf8f4;
+    --paper-hover: #ede9df;
+    --ink: #11100e;
+    --ink-muted: rgba(17, 16, 14, 0.65);
+    --ink-faint: rgba(17, 16, 14, 0.4);
+    --border-paper: rgba(17, 16, 14, 0.12);
+    --border-paper-light: rgba(17, 16, 14, 0.07);
+    --border-dark: rgba(244, 241, 234, 0.12);
+    --accent: #fe1e10;
+    --accent-hover: #df1609;
+    --accent-glow: rgba(254, 30, 16, 0.15);
+  }
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: "Courgette", cursive, Georgia, serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom 3-Font Combination Utilities */
+.font-courgette {
+  font-family: "Courgette", cursive, Georgia, serif;
+}
+
+.font-bubbles {
+  font-family: "Fuzzy Bubbles", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-script {
+  font-family: "Petit Formal Script", cursive;
+}
+
+/* Hairline border rule */
+.border-editorial {
+  border-color: rgba(17, 16, 14, 0.12);
+}
+
+.border-editorial-dark {
+  border-color: rgba(244, 241, 234, 0.12);
+}
+
+/* Subtle link hover rule */
+.link-hover-effect {
+  position: relative;
+  display: inline-block;
+}
+
+.link-hover-effect::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-hover-effect:hover::after {
+  width: 100%;
+}
+
+/* Flame animation */
+@keyframes flamePulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(254, 30, 16, 0.4));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 18px rgba(254, 30, 16, 0.65));
+    transform: scale(1.03);
+  }
+}
+
+.flame-glow {
+  animation: flamePulse 3.5s ease-in-out infinite;
 }
